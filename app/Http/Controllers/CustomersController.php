@@ -18,4 +18,25 @@ class CustomersController extends Controller
     {
         return view('customer', ['customer' => $customer]);
     }
+
+    public function add(Request $request)
+    {
+    	return view('addcustomer');
+    }
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'first_name'=>'required|max:255',
+            'last_name'=>'required|max:255',
+            'birth_date'=>'required|date'
+        ]);
+        $customer = new Customer;
+        $customer->first_name = $request->first_name;
+        $customer->last_name = $request->last_name;
+        $customer->birth_date = $request->birth_date;
+        $customer->save();
+        $customers = Customer::paginate();
+
+        return view('customers', ['customers' => $customers]);
+    }
 }

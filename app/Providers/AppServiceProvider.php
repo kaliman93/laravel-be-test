@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\AbstractPaginator;
 
@@ -15,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         AbstractPaginator::defaultView('pagination::bootstrap-4');
+        Schema::defaultStringLength(191);
     }
 
     /**
