@@ -19,4 +19,6 @@ class Customer extends Model
     {
         return $this->hasMany(Interaction::class);
     }
+    
 }
+
