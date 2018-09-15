@@ -19,6 +19,15 @@ class Customer extends Model
     {
         return $this->hasMany(Interaction::class);
     }
-    
+    public function scopeWithLastInteractionType($query)
+    {
+        $subQuery = \DB::table('interactions')->
+            select('type')->
+            whereRaw('customer_id = customers.id')->
+            latest()->
+            limit(1);
+
+        return $query->select('customers.*')->selectSub($subQuery, 'last_interaction_type');
+    }
 }
 

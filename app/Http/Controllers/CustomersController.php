@@ -10,6 +10,7 @@ class CustomersController extends Controller
     public function index(Request $request)
     {
         $customers = Customer::with('company')->
+        withLastInteractionType()->
         orderBy('last_name')->orderBy('first_name')->
         paginate();
 
