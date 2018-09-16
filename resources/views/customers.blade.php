@@ -3,7 +3,14 @@
 @section('content')
 
 <h1>Customers <small class="text-muted font-weight-light">({{ number_format($customers->total()) }} found)</small></h1>
-
+<form class="input-group my-4" action="{{ route('customers') }}" method="get">
+    <input type="hidden" name="order" value="{{ request('order') }}">
+    <input type="hidden" name="orderBy" value="{{ request('orderBy') }}">
+    <input type="text" class="w-45 form-control"  name="search" value="{{ request('search') }}">
+    <div class="input-group-append">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
 <table class="table my-4">
     <tr>
         <th><a class="{{ request('orderBy') === 'name' ? 'text-dark' : '' }}" href="{{ route('customers', ['orderBy' => 'name', 'order' => request('order') === 'asc' ? 'desc' : 'asc' ] + request()->except('page')) }}">Name</a></th>
