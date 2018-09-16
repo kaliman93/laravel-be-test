@@ -11,7 +11,7 @@ class CustomersController extends Controller
     {
         $customers = Customer::with('company')->
         withLastInteractionType()->
-        search($request->get('search'))->
+        whereFilters($request->only(['search', 'filter']))->
         orderByField($request->get('orderBy', 'name'), $request->get('order', 'asc'))->
         paginate();
 

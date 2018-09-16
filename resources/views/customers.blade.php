@@ -8,8 +8,13 @@
     <input type="hidden" name="orderBy" value="{{ request('orderBy') }}">
     <input type="text" class="w-45 form-control"  name="search" value="{{ request('search') }}">
     <div class="input-group-append">
+    <select name="filter" class="custom-select">
+        <option value="" selected>Select Filter</option>
+        <option value="birthday_this_week" {{ request('filter') === 'birthday_this_week' ? 'selected' : '' }}>Birthday this week</option>
+    </select>
         <button class="btn btn-primary" type="submit">Search</button>
     </div>
+ 
 </form>
 <table class="table my-4">
     <tr>

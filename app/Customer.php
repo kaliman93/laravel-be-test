@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use Illuminate\Support\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -77,6 +78,19 @@ class Customer extends Model
                     });                   
                 });
             };
+    }
+    public function scopeWhereBirthdayThisWeek($query){
+        $start = Carbon::now()->startOfWeek()->format('md');
+        $end = Carbon::now()->endOfWeek()->format('md');
+         return $query->whereNotNull('birth_date')->whereBetween(\DB::raw("date_format(birth_date, '%m%d')"),array($start,$end));
+    }
+    public function scopeWhereFilters($query, array $filters){
+        $filters = collect($filters);
+        $query->when($filters->get('search'), function ($query, $search) {
+            $query->search($search);
+        })->when($filters->get('filter') === 'birthday_this_week', function ($query, $filter) {
+            $query->whereBirthdayThisWeek();
+        });
     }
 }
 
