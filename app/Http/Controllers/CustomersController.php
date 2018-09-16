@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use Illuminate\Http\Request;
+use App\User;
 
 class CustomersController extends Controller
 {
@@ -13,6 +14,7 @@ class CustomersController extends Controller
         withLastInteractionType()->
         whereFilters($request->only(['search', 'filter']))->
         orderByField($request->get('orderBy', 'name'), $request->get('order', 'asc'))->
+        visibleTo(User::where('name', 'Nikola Gavric')->first())->
         paginate();
 
         return view('customers', ['customers' => $customers]);

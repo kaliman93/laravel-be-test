@@ -92,5 +92,10 @@ class Customer extends Model
             $query->whereBirthdayThisWeek();
         });
     }
+    public function scopeVisibleTo($query, User $user){
+        if ($user->is_admin) {
+            return $query;
+        }
+         return $query->where('sales_rep_id', $user->id);
+    }
 }
-
