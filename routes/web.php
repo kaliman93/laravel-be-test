@@ -15,3 +15,7 @@ Route::get('customers', 'CustomersController@index')->name('customers');
 Route::get('customers/{customer}/edit', 'CustomersController@edit')->name('customers.edit');
 Route::get('customers/add', 'CustomersController@add')->name('customers.add');
 Route::post('customers/store', 'CustomersController@store')->name('customers.store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
