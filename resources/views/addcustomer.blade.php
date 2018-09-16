@@ -27,6 +27,14 @@
                    <input type="text" name="last_name" class="form-control">
                </div>
                <div class="form-group">
+                   <label for="company">Select a Company</label>
+                   <select name="company_id" id="company" class="form-control">
+                     @foreach($companies as $company)
+                     <option value="{{ $company->id}}">{{ $company->name }}</option>
+                     @endforeach
+                   </select>
+               </div>
+               <div class="form-group">
                    <label for="birth_date">Birth Date</label>
                    <input type="Date" name="birth_date" class="form-control" value="2017-07-25">
                </div>
